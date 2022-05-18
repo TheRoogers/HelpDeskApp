@@ -14,4 +14,9 @@ class StyleText {
     fontWeight: FontWeight.w600,
     color: AppColors.preto
   );
+  static final bottomLogin = GoogleFonts.roboto(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: AppColors.background,
+  );
 }

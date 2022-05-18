@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:helpdeskport/screen/helpdesk/helpdesk_page.dart';
 import 'package:helpdeskport/screen/home/home_page.dart';
 import 'package:helpdeskport/screen/splash/splash_page.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         home: const SplashPage(),
         routes: <String, WidgetBuilder>{
           '/homepage': (BuildContext context) => const HomePage(),
+          '/helppage': (BuildContext context) => const HelpDeskPage(),
         });
   }
 }

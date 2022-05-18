@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:helpdeskport/shared/themes/app_colors.dart';
-import 'package:helpdeskport/shared/themes/app_images.dart';
-import 'package:helpdeskport/shared/themes/app_texts.dart';
+import '../../shared/themes/app_colors.dart';
+import '../../shared/themes/app_images.dart';
+import '../../shared/themes/app_texts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,20 +11,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _value = 0;
-  List<String> tipoChamado = ['Sistema', 'Manutenção', 'Rede'];
-  List<String> chamadoSistema = ['Senha', 'Acesso', 'Configuração'];
-  List<String> chamadoManutencao = ['Troca de peça', 'Impressora', 'Limpeza'];
-  List<String> chamadoRede = [
-    'Sem Acesso a Internet',
-    'Internet Lenta',
-    'Senha Wifi'
-  ];
-
-  List<String> categoriaChamado = [];
-  String? selectedtipoChamado;
-  String? selectedcategoriaChamado;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -33,219 +19,55 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: AppColors.laranja,
         title: const Text('Port Informatica'),
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(20.0),
-        children: [
-          Center(
-            child: Image.asset(
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: size.height * 0.02),
+            Image.asset(
               AppImages.logo,
               height: size.height * 0.15,
             ),
-          ),
-          Form(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: size.height * 0.02), //espaco entre a logo
-                Row(
-                  children: [
-                    Text(
-                      "Abrir Chamado:",
-                      textDirection: TextDirection.ltr,
-                      style: StyleText.titleLogin,
-                    ),
-                  ],
-                )
-              ],
+            SizedBox(height: size.height * 0.02),
+            Text(
+              'Help Desk',
+              style: StyleText.titleLogin,
             ),
-          ),
-          SizedBox(height: size.height * 0.02),
-
-          // Chamado Dropdown
-          SizedBox(
-            width: size.width * 0.90,
-            child: Column(
-              children: [
-                Material(
-                  child: InputDecorator(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        hint: const Text(
-                          "Selecione o Tipo de chamado",
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        value: selectedtipoChamado,
-                        isDense: true,
-                        isExpanded: true,
-                        items: tipoChamado.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (chamado) {
-                          if (chamado == 'Sistema') {
-                            categoriaChamado = chamadoManutencao;
-                          } else if (chamado == 'Manutenção') {
-                            categoriaChamado = chamadoSistema;
-                          } else if (chamado == 'Rede') {
-                            categoriaChamado = chamadoRede;
-                          } else {
-                            categoriaChamado = [];
-                          }
-                          setState(() {
-                            selectedcategoriaChamado = null;
-                            selectedtipoChamado = chamado;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+            SizedBox(height: size.height * 0.15),
+            ElevatedButton(
+              child: const Text('Abrir chamado'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  //tamanho do botao
+                  horizontal: 80,
+                  vertical: 20,
                 ),
-              ],
+                primary: AppColors.laranja,
+                elevation: 15,
+                onPrimary: Colors.white,
+                textStyle: StyleText.bottomLogin,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/helppage');
+              },
             ),
-          ),
-          // tipo chamado Dropdown Ends here
-
-          SizedBox(height: size.height * 0.02),
-
-          // Categoria Dropdown
-          SizedBox(
-            width: size.width * 0.90,
-            child: Column(
-              children: [
-                Material(
-                  child: InputDecorator(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.transparent),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        hint: const Text(
-                          "Categoria",
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        value: selectedcategoriaChamado,
-                        isExpanded: true,
-                        isDense: true,
-                        items: categoriaChamado.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (categoria) {
-                          setState(() {
-                            selectedcategoriaChamado = categoria;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
+             SizedBox(height: size.height * 0.10),
+            ElevatedButton(
+              child: const Text('Consultar chamado'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  //tamanho do botao
+                  horizontal: 60,
+                  vertical: 20,
                 ),
-              ],
-            ),
-          ),
-          // categoria Dropdown Ends here
-          SizedBox(height: size.height * 0.01),
-          Row(
-            children: [
-              Text(
-                "Selecione a criticidade:",
-                textDirection: TextDirection.ltr,
-                style: StyleText.titleLogin,
+                primary: AppColors.laranja,
+                elevation: 15,
+                onPrimary: Colors.white,
+                textStyle: StyleText.bottomLogin,
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Radio(
-                    value: 1,
-                    groupValue: _value,
-                    onChanged: (_) {
-                      setState(
-                        () {
-                          _value = 1;
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(
-                    width: 0.0,
-                  ),
-                  const Text("Baixa")
-                ],
-              ),
-              Row(
-                children: [
-                  Radio(
-                    value: 2,
-                    groupValue: _value,
-                    onChanged: (_) {
-                      setState(
-                        () {
-                          _value = 2;
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(
-                    width: 0.0,
-                  ),
-                  const Text("Media")
-                ],
-              ),
-              Row(
-                children: [
-                  Radio(
-                    value: 3,
-                    groupValue: _value,
-                    onChanged: (_) {
-                      setState(
-                        () {
-                          _value = 3;
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(
-                    width: 0.0,
-                  ),
-                  const Text("Alta")
-                ],
-              ),
-            ],
-          ),
-          // fim da criticidade
-          Row(
-            children: [
-              Text(
-                "Descreva sua duvida: ",
-                textDirection: TextDirection.ltr,
-                style: StyleText.titleLogin,
-              ),
-            ],
-          ),
-        ],
+              onPressed: () {},
+            )
+          ],
+        ),
       ),
     );
   }
