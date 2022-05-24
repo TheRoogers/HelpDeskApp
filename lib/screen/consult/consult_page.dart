@@ -26,7 +26,7 @@ class _ConsultPageState extends State<ConsultPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Read data from cloud firestore',
+              'Chamados em Aberto',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
