@@ -64,7 +64,9 @@ class _HomePageState extends State<HomePage> {
                 onPrimary: Colors.white,
                 textStyle: StyleText.bottomLogin,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamed(context, '/consultpage');
+              },
             )
           ],
         ),
