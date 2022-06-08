@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:date_format/date_format.dart';
 import '../../shared/services/globalmethods.dart';
 import '../../shared/themes/app_colors.dart';
 import '../../shared/themes/app_texts.dart';
+
 
 class HelpDeskPage extends StatefulWidget {
   const HelpDeskPage({Key? key}) : super(key: key);
@@ -33,6 +35,9 @@ class _HelpDeskPageState extends State<HelpDeskPage> {
   final _formKey = GlobalKey<FormState>();
   final GlobalMethods _globalMethods = GlobalMethods();
   bool isLoading = false;
+  String createdAt = formatDate(DateTime.now(), [dd, '/', mm, '/', yyyy, ' ', HH, ':', nn]);
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -371,7 +376,8 @@ class _HelpDeskPageState extends State<HelpDeskPage> {
                                     'tipo': tipo,
                                     'categoria': categoria,
                                     'criticidade': criticidade,
-                                    'observacao': observacao
+                                    'observacao': observacao,
+                                    'createdAt': createdAt
                                   })
                                   // ignore: avoid_print
                                   .then((value) => print('chamados Added'))

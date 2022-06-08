@@ -2,22 +2,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../shared/themes/app_colors.dart';
 
-class ConsultPage extends StatefulWidget {
-  const ConsultPage({Key? key}) : super(key: key);
+class ConsultClosed extends StatefulWidget {
+  const ConsultClosed({Key? key}) : super(key: key);
 
   @override
-  State<ConsultPage> createState() => _ConsultPageState();
+  State<ConsultClosed> createState() => _ConsultClosedState();
 }
 
-class _ConsultPageState extends State<ConsultPage> {
+class _ConsultClosedState extends State<ConsultClosed> {
   final Stream<QuerySnapshot> chamados =
-      FirebaseFirestore.instance.collection('chamados').snapshots();
+      FirebaseFirestore.instance.collection('chamadosfechados').snapshots();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.laranja,
-        title: const Text('Chamados em Aberto'),
+        title: const Text('Chamados Fechados'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -25,14 +25,14 @@ class _ConsultPageState extends State<ConsultPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Chamados em Aberto',
+              'Chamados Fechados',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Container(
-              height: 250,
+              height: 500,
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: StreamBuilder<QuerySnapshot>(
                 stream: chamados,
@@ -52,7 +52,7 @@ class _ConsultPageState extends State<ConsultPage> {
                     itemCount: data.size,
                     itemBuilder: (context, index) {
                       return Text(
-                        'Chamado do tipo: ${data.docs[index]['tipo']}\n para a categoria:${data.docs[index]['categoria']}\n com criticidade ${data.docs[index]['criticidade']}\n Observação: ${data.docs[index]['observacao']}\n Data de Abertura: ${data.docs[index]['createdAt']}\n',
+                        'Chamado do tipo: ${data.docs[index]['tipo']}\n para a categoria:${data.docs[index]['categoria']}\n com criticidade ${data.docs[index]['criticidade']}\n Observação: ${data.docs[index]['observacao']}\n Data de Abertura: ${data.docs[index]['createdAt']}\n Data de Fechamento: ${data.docs[index]['closedAt']}\n',
                         style: const TextStyle(
                           fontSize: 15,
                         ),

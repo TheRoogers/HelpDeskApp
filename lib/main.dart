@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:helpdeskport/screen/consult%20closed/consult_closed_page.dart';
 import 'package:helpdeskport/screen/consult/consult_page.dart';
 import 'package:helpdeskport/screen/helpdesk/helpdesk_page.dart';
 import 'package:helpdeskport/screen/home/home_page.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
           '/homepage': (BuildContext context) => const HomePage(),
           '/helppage': (BuildContext context) => const HelpDeskPage(),
           '/consultpage': (BuildContext context) => const ConsultPage(),
+          '/consultclosed': (BuildContext context) => const ConsultClosed(),
         });
   }
 }

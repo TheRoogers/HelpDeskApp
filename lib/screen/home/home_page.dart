@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
             ),
              SizedBox(height: size.height * 0.10),
             ElevatedButton(
-              child: const Text('Consultar chamado'),
+              child: const Text('Chamados em Aberto'),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                   //tamanho do botao
@@ -66,6 +66,24 @@ class _HomePageState extends State<HomePage> {
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/consultpage');
+              },
+            ),
+            SizedBox(height: size.height * 0.10),
+            ElevatedButton(
+              child: const Text('Chamados Fechados'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  //tamanho do botao
+                  horizontal: 60,
+                  vertical: 20,
+                ),
+                primary: AppColors.laranja,
+                elevation: 15,
+                onPrimary: Colors.white,
+                textStyle: StyleText.bottomLogin,
+              ),
+              onPressed: () {
+                Navigator.pushNamed(context, '/consultclosed');
               },
             )
           ],
